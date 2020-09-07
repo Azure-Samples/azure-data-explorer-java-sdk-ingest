@@ -180,7 +180,6 @@ public class App {
                     IngestionStatus status = result.getIngestionStatusCollection().get(0);
                     while (status.status == OperationStatus.Pending) {
                         Thread.sleep(5000);
-                        System.out.println("checking status>>>");
                         status = result.getIngestionStatusCollection().get(0);
                     }
                     System.out.println("Ingestion completed");
