@@ -155,7 +155,6 @@ public class App {
     static void ingestFile(String database) throws InterruptedException {
         String blobPath = String.format(blobStorePathFormat, blobStoreAccountName, blobStoreContainer,
                 blobStoreFileName, blobStoreToken);
-        System.out.println(blobPath);
         BlobSourceInfo blobSourceInfo = new BlobSourceInfo(blobPath);
 
         IngestionProperties ingestionProperties = new IngestionProperties(database, tableName);
