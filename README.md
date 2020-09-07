@@ -33,7 +33,6 @@ public static void main(final String[] args) throws Exception {
 }
 ```
 
-> [!TIP]
 > To try different combinations of operations, you can uncomment/comment the respective methods in `App.java`.
 
 1. Clone the sample code from GitHub:
