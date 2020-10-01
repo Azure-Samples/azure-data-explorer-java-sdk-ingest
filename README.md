@@ -45,6 +45,7 @@ public static void main(final String[] args) throws Exception {
 2. Set the service principal information with the cluster endpoint and the database name in the form of environment variables that will be used by the program:
 
     ```console
+    export AZURE_SP_TENANT_ID="<replace with tenantID>"
     export AZURE_SP_CLIENT_ID="<replace with appID>"
     export AZURE_SP_CLIENT_SECRET="<replace with password>"
     export KUSTO_ENDPOINT="https://<cluster name>.<azure region>.kusto.windows.net"
