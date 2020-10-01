@@ -22,11 +22,13 @@ import com.microsoft.azure.kusto.ingest.source.BlobSourceInfo;
  * Example to demonstrate Data Explorer ingestion and management operations
  */
 public class App {
+    static String tenantIDEnvVar = "AZURE_SP_TENANT_ID";
     static String clientIDEnvVar = "AZURE_SP_CLIENT_ID";
     static String clientSecretEnvVar = "AZURE_SP_CLIENT_SECRET";
     static String endpointEnvVar = "KUSTO_ENDPOINT";
     static String databaseEnvVar = "KUSTO_DB";
 
+    static String tenantID = null;
     static String clientID = null;
     static String clientSecret = null;
     static String endpoint = null;
@@ -43,6 +45,11 @@ public class App {
      * validates whether required environment variables are present
      */
     static {
+        tenantID = System.getenv(tenantIDEnvVar);
+        if (tenantID == null) {
+            throw new IllegalArgumentException("Missing environment variable " + tenantIDEnvVar);
+        }
+
         clientID = System.getenv(clientIDEnvVar);
         if (clientID == null) {
             throw new IllegalArgumentException("Missing environment variable " + clientIDEnvVar);
@@ -73,7 +80,7 @@ public class App {
      */
     static Client getClient() throws Exception {
         ConnectionStringBuilder csb = ConnectionStringBuilder.createWithAadApplicationCredentials(endpoint, clientID,
-                clientSecret);
+                clientSecret, tenantID);
 
         return ClientFactory.createClient(csb);
     }
@@ -133,7 +140,7 @@ public class App {
     static IngestClient getIngestionClient() throws Exception {
         String ingestionEndpoint = "https://ingest-" + URI.create(endpoint).getHost();
         ConnectionStringBuilder csb = ConnectionStringBuilder.createWithAadApplicationCredentials(ingestionEndpoint,
-                clientID, clientSecret);
+                clientID, clientSecret, tenantID);
 
         return IngestClientFactory.createClient(csb);
     }
